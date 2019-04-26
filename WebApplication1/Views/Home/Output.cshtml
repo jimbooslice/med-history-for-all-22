@@ -6,9 +6,29 @@
 @{
     var text = Model.Text;
     var split = text.Split("\n");
+
+    var fText = Model.ForeignText;
+    var fSplit = fText.Split("\n");
 }
-@foreach (var t in split)
-{
-    <p>@t</p>
-}
+
+<table>
+    <tbody>
+        <tr>
+            <td>
+                @foreach (var t in fSplit)
+                {
+                    <span>@t</span><br >
+                }
+            </td>
+            <td>
+                @foreach (var t in split)
+                {
+                    <span>@t</span><br >
+                }
+            </td>
+
+        </tr>
+    </tbody>
+</table>
+
 

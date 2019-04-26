@@ -46,6 +46,7 @@ namespace WebApplication1.Controllers
            // string es_text = @"Historia social:\nFamilia: Su estado civil es divorciado.\nEducación / Trabajo: Paciente completado\neducación hasta la licenciatura, por ejemplo,\nBA, AB, BS, BBA. Su ocupacion es\nAsistente administrativo. Ella es\nActualmente no funciona. La ultima trabajaba\nen 2009. Ella no está en discapacidad. Ella\nNo está involucrado en acciones legales para el\ndolor. Ella tiene otra legal\nproblemas.\nExperiencias Adversas de la Infancia: Ella no\nexperimentar cualquier trastorno importante antes de\nla edad de 17. Ella experimentó algunos\ntrastorno grave después de la edad de 17 años.\nNo se sintió descuidado como un niño. Ella\nno experimentó dolor crónico como una\nniño. Ella no se siente amenazada en\nsu entorno actual. Ella nunca ha\nHa sido hospitalizado psiquiátricamente.\nSustancia: ella negó fumar. Ella negó\nbebiendo alcohol. Ella negó usar\ndrogas callejeras Ella apoyó a otros piensan\nElla tiene problemas con las drogas o el alcohol.\nElla respaldó haber recibido tratamiento.\npara el uso de sustancias.\n";
             var client = ImageAnnotatorClient.Create();
             var text = "";
+            var foreignText = "";
             // TextAnnotation response = null;
             // Google.Cloud.Vision.V1.Image image = null;
             using (var reader = new StreamReader(file.OpenReadStream()))
@@ -56,15 +57,19 @@ namespace WebApplication1.Controllers
                 TranslationClient tc = TranslationClient.Create();
                 var tcresp = tc.TranslateText(response.Text, "en");
                 var paragraphs = tcresp.TranslatedText.Split("\n");
-                text = tcresp.TranslatedText;
-                foreach(var p in paragraphs) {
+                
+                foreach (var p in paragraphs) {
                     Console.WriteLine(p);
                 }
+
+                text = tcresp.TranslatedText;
+                foreignText = response.Text;
             }
 
             var delim = new Output()
             {
-                Text = text
+                Text = text,
+                ForeignText = foreignText
             };
             return View("Output", delim);
         }

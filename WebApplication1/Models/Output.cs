@@ -8,5 +8,6 @@ namespace WebApplication1.Models
     public class Output
     {
         public string Text { get; set; }
+        public string ForeignText { get; set; }
     }
 }
