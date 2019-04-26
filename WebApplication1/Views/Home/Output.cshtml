@@ -1,0 +1,14 @@
+﻿@model WebApplication1.Models.Output
+@{
+    ViewData["Title"] = "Output";
+}
+
+@{
+    var text = Model.Text;
+    var split = text.Split("\n");
+}
+@foreach (var t in split)
+{
+    <p>@t</p>
+}
+
